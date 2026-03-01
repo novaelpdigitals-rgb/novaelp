@@ -1033,125 +1033,74 @@ const GetADemo = () => {
             animate={{ opacity: 1, x: 0 }}
             className="lg:col-span-2 bg-white rounded-[3rem] p-8 md:p-12 shadow-xl border border-slate-100"
           >
-            <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">First Name *</label>
-                  <input type="text" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Jane" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Last Name *</label>
-                  <input type="text" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Doe" />
-                </div>
-              </div>
+           <form 
+  className="space-y-8" 
+  action="https://formspree.io/f/mnjbybyq" 
+  method="POST"
+>
+  <div className="grid md:grid-cols-2 gap-8">
+    <div className="space-y-2">
+      <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">First Name *</label>
+      <input type="text" name="firstName" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Jane" />
+    </div>
+    <div className="space-y-2">
+      <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Last Name *</label>
+      <input type="text" name="lastName" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Doe" />
+    </div>
+  </div>
 
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Work Email *</label>
-                  <input type="email" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="jane@school.edu" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Job Title *</label>
-                  <input type="text" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Principal / IT Director" />
-                </div>
-              </div>
+  <div className="grid md:grid-cols-2 gap-8">
+    <div className="space-y-2">
+      <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Work Email *</label>
+      <input type="email" name="email" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="jane@school.edu" />
+    </div>
+    <div className="space-y-2">
+      <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Job Title *</label>
+      <input type="text" name="jobTitle" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Principal / IT Director" />
+    </div>
+  </div>
 
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">School / Organization *</label>
-                  <input type="text" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Springfield Elementary" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Phone Number *</label>
-                  <input type="tel" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="+234 800 000 0000" />
-                </div>
-              </div>
+  <div className="grid md:grid-cols-2 gap-8">
+    <div className="space-y-2">
+      <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">School / Organization *</label>
+      <input type="text" name="organization" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Springfield Elementary" />
+    </div>
+    <div className="space-y-2">
+      <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Phone Number *</label>
+      <input type="tel" name="phone" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="+234 800 000 0000" />
+    </div>
+  </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Country *</label>
-                <select className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all appearance-none">
-                  <option value="">Select a country</option>
-                  <optgroup label="Africa">
-                    <option>Algeria</option>
-                    <option>Angola</option>
-                    <option>Benin</option>
-                    <option>Botswana</option>
-                    <option>Burkina Faso</option>
-                    <option>Burundi</option>
-                    <option>Cabo Verde</option>
-                    <option>Cameroon</option>
-                    <option>Central African Republic</option>
-                    <option>Chad</option>
-                    <option>Comoros</option>
-                    <option>Congo (Congo-Brazzaville)</option>
-                    <option>Cote d'Ivoire</option>
-                    <option>Djibouti</option>
-                    <option>Egypt</option>
-                    <option>Equatorial Guinea</option>
-                    <option>Eritrea</option>
-                    <option>Eswatini</option>
-                    <option>Ethiopia</option>
-                    <option>Gabon</option>
-                    <option>Gambia</option>
-                    <option>Ghana</option>
-                    <option>Guinea</option>
-                    <option>Guinea-Bissau</option>
-                    <option>Kenya</option>
-                    <option>Lesotho</option>
-                    <option>Liberia</option>
-                    <option>Libya</option>
-                    <option>Madagascar</option>
-                    <option>Malawi</option>
-                    <option>Mali</option>
-                    <option>Mauritania</option>
-                    <option>Mauritius</option>
-                    <option>Morocco</option>
-                    <option>Mozambique</option>
-                    <option>Namibia</option>
-                    <option>Niger</option>
-                    <option>Nigeria</option>
-                    <option>Rwanda</option>
-                    <option>Sao Tome and Principe</option>
-                    <option>Senegal</option>
-                    <option>Seychelles</option>
-                    <option>Sierra Leone</option>
-                    <option>Somalia</option>
-                    <option>South Africa</option>
-                    <option>South Sudan</option>
-                    <option>Sudan</option>
-                    <option>Tanzania</option>
-                    <option>Togo</option>
-                    <option>Tunisia</option>
-                    <option>Uganda</option>
-                    <option>Zambia</option>
-                    <option>Zimbabwe</option>
-                  </optgroup>
-                  <optgroup label="Other Regions">
-                    <option>United States</option>
-                    <option>United Kingdom</option>
-                    <option>Canada</option>
-                    <option>Australia</option>
-                    <option>Other</option>
-                  </optgroup>
-                </select>
-              </div>
+  <div className="space-y-2">
+    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Country *</label>
+    <select name="country" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all appearance-none">
+      <option value="">Select a country</option>
+      <option value="Nigeria">Nigeria</option>
+      <option value="United States">United States</option>
+      <option value="United Kingdom">United Kingdom</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">How can we help? *</label>
-                <textarea required rows={4} className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Tell us about your school's needs..."></textarea>
-              </div>
+  <div className="space-y-2">
+    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">How can we help? *</label>
+    <textarea name="message" required rows={4} className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Tell us about your school's needs..."></textarea>
+  </div>
 
-              <div className="flex items-start space-x-3">
-                <input type="checkbox" id="consent" className="mt-1 w-5 h-5 rounded border-slate-300 text-brand-600 focus:ring-brand-500" />
-                <label htmlFor="consent" className="text-sm text-slate-500 leading-relaxed">
-                  I agree to receive communications from Novaelp regarding products and services. I can unsubscribe at any time. View our <a href="#" className="text-brand-600 underline">Privacy Policy</a>.
-                </label>
-              </div>
+  <div className="flex items-start space-x-3">
+    <input type="checkbox" name="consent" id="consent" className="mt-1 w-5 h-5 rounded border-slate-300 text-brand-600 focus:ring-brand-500" />
+    <label htmlFor="consent" className="text-sm text-slate-500 leading-relaxed">
+      I agree to receive communications from Novaelp.
+    </label>
+  </div>
 
-              <button className="w-full bg-brand-600 text-white px-10 py-5 rounded-full text-xl font-bold hover:bg-brand-700 transition-all shadow-xl hover:shadow-brand-200 active:scale-95">
-                Submit Request
-              </button>
-            </form>
+  <button 
+    type="submit"
+    className="w-full bg-brand-600 text-white px-10 py-5 rounded-full text-xl font-bold hover:bg-brand-700 transition-all shadow-xl active:scale-95"
+  >
+    Submit Request
+  </button>
+</form>
           </motion.div>
 
           {/* Info Column */}
