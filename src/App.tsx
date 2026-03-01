@@ -13,6 +13,7 @@ import {
   ChevronRight, 
   PlayCircle, 
   CheckCircle2, 
+  Check,
   Users, 
   ArrowRight,
   ArrowLeft,
