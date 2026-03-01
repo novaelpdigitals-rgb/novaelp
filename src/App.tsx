@@ -1003,6 +1003,38 @@ const BlogPostEntrepreneurship = () => {
 };
 
 const GetADemo = () => {
+  const [status, setStatus] = React.useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("submitting");
+    
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mnjbybyq", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        const result = await response.json();
+        console.error("Formspree error:", result);
+        setStatus("error");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setStatus("error");
+    }
+  };
+
   return (
     <div className="pt-32 pb-20">
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
@@ -1033,75 +1065,103 @@ const GetADemo = () => {
             animate={{ opacity: 1, x: 0 }}
             className="lg:col-span-2 bg-white rounded-[3rem] p-8 md:p-12 shadow-xl border border-slate-100"
           >
-           <form 
-  className="space-y-8" 
-  action="https://formspree.io/f/mnjbybyq" 
-  method="POST"
->
-  <div className="grid md:grid-cols-2 gap-8">
-    <div className="space-y-2">
-      <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">First Name *</label>
-      <input type="text" name="firstName" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Jane" />
-    </div>
-    <div className="space-y-2">
-      <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Last Name *</label>
-      <input type="text" name="lastName" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Doe" />
-    </div>
-  </div>
+            {status === "success" ? (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="h-full flex flex-col items-center justify-center text-center py-20"
+              >
+                <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-8">
+                  <Check size={40} />
+                </div>
+                <h3 className="text-3xl font-bold text-slate-900 mb-4">Request Received!</h3>
+                <p className="text-xl text-slate-600 max-w-md">
+                  We have taken your request and we will get back to you via your email and mobile number very soon.
+                </p>
+                <button 
+                  onClick={() => setStatus("idle")}
+                  className="mt-10 text-brand-600 font-bold hover:underline"
+                >
+                  Send another request
+                </button>
+              </motion.div>
+            ) : (
+              <form 
+                className="space-y-8" 
+                onSubmit={handleSubmit}
+              >
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">First Name *</label>
+                    <input type="text" name="firstName" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Jane" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Last Name *</label>
+                    <input type="text" name="lastName" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Doe" />
+                  </div>
+                </div>
 
-  <div className="grid md:grid-cols-2 gap-8">
-    <div className="space-y-2">
-      <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Work Email *</label>
-      <input type="email" name="email" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="jane@school.edu" />
-    </div>
-    <div className="space-y-2">
-      <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Job Title *</label>
-      <input type="text" name="jobTitle" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Principal / IT Director" />
-    </div>
-  </div>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Work Email *</label>
+                    <input type="email" name="email" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="jane@school.edu" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Job Title *</label>
+                    <input type="text" name="jobTitle" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Principal / IT Director" />
+                  </div>
+                </div>
 
-  <div className="grid md:grid-cols-2 gap-8">
-    <div className="space-y-2">
-      <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">School / Organization *</label>
-      <input type="text" name="organization" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Springfield Elementary" />
-    </div>
-    <div className="space-y-2">
-      <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Phone Number *</label>
-      <input type="tel" name="phone" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="+234 800 000 0000" />
-    </div>
-  </div>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">School / Organization *</label>
+                    <input type="text" name="organization" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Springfield Elementary" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Phone Number *</label>
+                    <input type="tel" name="phone" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="+234 800 000 0000" />
+                  </div>
+                </div>
 
-  <div className="space-y-2">
-    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Country *</label>
-    <select name="country" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all appearance-none">
-      <option value="">Select a country</option>
-      <option value="Nigeria">Nigeria</option>
-      <option value="United States">United States</option>
-      <option value="United Kingdom">United Kingdom</option>
-      <option value="Other">Other</option>
-    </select>
-  </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Country *</label>
+                  <select name="country" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all appearance-none">
+                    <option value="">Select a country</option>
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="United States">United States</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
 
-  <div className="space-y-2">
-    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">How can we help? *</label>
-    <textarea name="message" required rows={4} className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Tell us about your school's needs..."></textarea>
-  </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">How can we help? *</label>
+                  <textarea name="message" required rows={4} className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Tell us about your school's needs..."></textarea>
+                </div>
 
-  <div className="flex items-start space-x-3">
-    <input type="checkbox" name="consent" id="consent" className="mt-1 w-5 h-5 rounded border-slate-300 text-brand-600 focus:ring-brand-500" />
-    <label htmlFor="consent" className="text-sm text-slate-500 leading-relaxed">
-      I agree to receive communications from Novaelp.
-    </label>
-  </div>
+                <div className="flex items-start space-x-3">
+                  <input type="checkbox" name="consent" id="consent" className="mt-1 w-5 h-5 rounded border-slate-300 text-brand-600 focus:ring-brand-500" />
+                  <label htmlFor="consent" className="text-sm text-slate-500 leading-relaxed">
+                    I agree to receive communications from Novaelp.
+                  </label>
+                </div>
 
-  <button 
-    type="submit"
-    className="w-full bg-brand-600 text-white px-10 py-5 rounded-full text-xl font-bold hover:bg-brand-700 transition-all shadow-xl active:scale-95"
-  >
-    Submit Request
-  </button>
-</form>
+                <button 
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className="w-full bg-brand-600 text-white px-10 py-5 rounded-full text-xl font-bold hover:bg-brand-700 transition-all shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {status === "submitting" ? "Sending..." : "Submit Request"}
+                </button>
+                {status === "error" && (
+                  <p className="text-red-500 text-center font-medium">
+                    Something went wrong. Please try again or contact us directly.
+                  </p>
+                )}
+              </form>
+            )}
           </motion.div>
+          
 
           {/* Info Column */}
           <motion.div 
