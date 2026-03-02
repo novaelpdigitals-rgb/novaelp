@@ -12,8 +12,7 @@ import {
   Library, 
   ChevronRight, 
   CirclePlay, 
-  CheckCircle, 
-  Check,
+  CircleCheck, 
   Users, 
   ArrowRight,
   ArrowLeft,
@@ -138,7 +137,7 @@ const Footer = () => {
         <div className="border-t border-slate-100 pt-8 flex flex-col md:row justify-between items-center text-slate-400 text-xs">
           <p>© 2026 Novaelp. All rights reserved.</p>
           <div className="flex items-center space-x-2 mt-4 md:mt-0">
-            <CheckCircle size={14} className="text-emerald-500" />
+            <CircleCheck size={14} className="text-emerald-500" />
             <span>SOC2 Type II Certified</span>
           </div>
         </div>
@@ -396,7 +395,7 @@ const Solutions = () => {
               <div className="grid grid-cols-2 gap-4">
                 {item.features.map((feature, fIndex) => (
                   <div key={fIndex} className="flex items-center space-x-2">
-                    <CheckCircle className="text-brand-500" size={18} />
+                    <CircleCheck className="text-brand-500" size={18} />
                     <span className="text-sm font-medium text-slate-700">{feature}</span>
                   </div>
                 ))}
@@ -1027,7 +1026,7 @@ const GetADemo = () => {
         form.reset();
       } else {
         const result = await response.json();
-        console.error("Formspree error:", result);
+        console.error("Formspree error details:", result);
         setStatus("error");
       }
     } catch (error) {
@@ -1073,7 +1072,7 @@ const GetADemo = () => {
                 className="h-full flex flex-col items-center justify-center text-center py-20"
               >
                 <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-8">
-                  <Check size={40} />
+                  <CircleCheck size={40} />
                 </div>
                 <h3 className="text-3xl font-bold text-slate-900 mb-4">Request Received!</h3>
                 <p className="text-xl text-slate-600 max-w-md">
@@ -1092,77 +1091,158 @@ const GetADemo = () => {
                 onSubmit={handleSubmit}
               >
                 <div className="grid md:grid-cols-2 gap-8">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">First Name *</label>
-                    <input type="text" name="firstName" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Jane" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Last Name *</label>
-                    <input type="text" name="lastName" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Doe" />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Work Email *</label>
-                    <input type="email" name="email" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="jane@school.edu" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Job Title *</label>
-                    <input type="text" name="jobTitle" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Principal / IT Director" />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">School / Organization *</label>
-                    <input type="text" name="organization" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Springfield Elementary" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Phone Number *</label>
-                    <input type="tel" name="phone" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="+234 800 000 0000" />
-                  </div>
-                </div>
-
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Country *</label>
-                  <select name="country" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all appearance-none">
-                    <option value="">Select a country</option>
-                    <option value="Nigeria">Nigeria</option>
-                    <option value="United States">United States</option>
-                    <option value="United Kingdom">United Kingdom</option>
-                    <option value="Other">Other</option>
+                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">First Name *</label>
+                  <input type="text" name="firstName" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Jane" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Last Name *</label>
+                  <input type="text" name="lastName" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Doe" />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Work Email *</label>
+                  <input type="email" name="email" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="jane@school.edu" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Job Title *</label>
+                  <input type="text" name="jobTitle" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Principal / IT Director" />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">School / Organization *</label>
+                  <input type="text" name="organization" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Springfield Elementary" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Phone Number *</label>
+                  <input type="tel" name="phone" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="+234 800 000 0000" />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">School Level *</label>
+                  <select name="schoolLevel" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all appearance-none">
+                    <option value="">Select Level</option>
+                    <option value="Elementary">Elementary School</option>
+                    <option value="Middle">Middle School</option>
+                    <option value="High">High School</option>
+                    <option value="HigherEd">Higher Education</option>
+                    <option value="Corporate">Corporate Training</option>
                   </select>
                 </div>
-
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">How can we help? *</label>
-                  <textarea name="message" required rows={4} className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Tell us about your school's needs..."></textarea>
+                  <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Number of Students *</label>
+                  <select name="studentCount" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all appearance-none">
+                    <option value="">Select Range</option>
+                    <option value="1-100">1 - 100</option>
+                    <option value="101-500">101 - 500</option>
+                    <option value="501-1000">501 - 1000</option>
+                    <option value="1000+">1000+</option>
+                  </select>
                 </div>
+              </div>
 
-                <div className="flex items-start space-x-3">
-                  <input type="checkbox" name="consent" id="consent" className="mt-1 w-5 h-5 rounded border-slate-300 text-brand-600 focus:ring-brand-500" />
-                  <label htmlFor="consent" className="text-sm text-slate-500 leading-relaxed">
-                    I agree to receive communications from Novaelp.
-                  </label>
-                </div>
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">Country *</label>
+                <select name="country" required className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all appearance-none">
+                  <option value="">Select a country</option>
+                  <optgroup label="Africa">
+                    <option value="Algeria">Algeria</option>
+                    <option value="Angola">Angola</option>
+                    <option value="Benin">Benin</option>
+                    <option value="Botswana">Botswana</option>
+                    <option value="Burkina Faso">Burkina Faso</option>
+                    <option value="Burundi">Burundi</option>
+                    <option value="Cabo Verde">Cabo Verde</option>
+                    <option value="Cameroon">Cameroon</option>
+                    <option value="Central African Republic">Central African Republic</option>
+                    <option value="Chad">Chad</option>
+                    <option value="Comoros">Comoros</option>
+                    <option value="Congo">Congo (Congo-Brazzaville)</option>
+                    <option value="Cote d'Ivoire">Cote d'Ivoire</option>
+                    <option value="Djibouti">Djibouti</option>
+                    <option value="Egypt">Egypt</option>
+                    <option value="Equatorial Guinea">Equatorial Guinea</option>
+                    <option value="Eritrea">Eritrea</option>
+                    <option value="Eswatini">Eswatini</option>
+                    <option value="Ethiopia">Ethiopia</option>
+                    <option value="Gabon">Gabon</option>
+                    <option value="Gambia">Gambia</option>
+                    <option value="Ghana">Ghana</option>
+                    <option value="Guinea">Guinea</option>
+                    <option value="Guinea-Bissau">Guinea-Bissau</option>
+                    <option value="Kenya">Kenya</option>
+                    <option value="Lesotho">Lesotho</option>
+                    <option value="Liberia">Liberia</option>
+                    <option value="Libya">Libya</option>
+                    <option value="Madagascar">Madagascar</option>
+                    <option value="Malawi">Malawi</option>
+                    <option value="Mali">Mali</option>
+                    <option value="Mauritania">Mauritania</option>
+                    <option value="Mauritius">Mauritius</option>
+                    <option value="Morocco">Morocco</option>
+                    <option value="Mozambique">Mozambique</option>
+                    <option value="Namibia">Namibia</option>
+                    <option value="Niger">Niger</option>
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="Rwanda">Rwanda</option>
+                    <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                    <option value="Senegal">Senegal</option>
+                    <option value="Seychelles">Seychelles</option>
+                    <option value="Sierra Leone">Sierra Leone</option>
+                    <option value="Somalia">Somalia</option>
+                    <option value="South Africa">South Africa</option>
+                    <option value="South Sudan">South Sudan</option>
+                    <option value="Sudan">Sudan</option>
+                    <option value="Tanzania">Tanzania</option>
+                    <option value="Togo">Togo</option>
+                    <option value="Tunisia">Tunisia</option>
+                    <option value="Uganda">Uganda</option>
+                    <option value="Zambia">Zambia</option>
+                    <option value="Zimbabwe">Zimbabwe</option>
+                  </optgroup>
+                  <optgroup label="Other Regions">
+                    <option value="United States">United States</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Other">Other</option>
+                  </optgroup>
+                </select>
+              </div>
 
-                <button 
-                  type="submit"
-                  disabled={status === "submitting"}
-                  className="w-full bg-brand-600 text-white px-10 py-5 rounded-full text-xl font-bold hover:bg-brand-700 transition-all shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {status === "submitting" ? "Sending..." : "Submit Request"}
-                </button>
-                {status === "error" && (
-                  <p className="text-red-500 text-center font-medium">
-                    Something went wrong. Please try again or contact us directly.
-                  </p>
-                )}
-              </form>
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wider">How can we help? *</label>
+                <textarea name="message" required rows={4} className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all" placeholder="Tell us about your school's needs..."></textarea>
+              </div>
+
+              <div className="flex items-start space-x-3">
+                <input type="checkbox" name="consent" id="consent" className="mt-1 w-5 h-5 rounded border-slate-300 text-brand-600 focus:ring-brand-500" />
+                <label htmlFor="consent" className="text-sm text-slate-500 leading-relaxed">
+                  I agree to receive communications from Novaelp regarding products and services. I can unsubscribe at any time. View our <a href="#" className="text-brand-600 underline">Privacy Policy</a>.
+                </label>
+              </div>
+
+              <button 
+                type="submit"
+                disabled={status === "submitting"}
+                className="w-full bg-brand-600 text-white px-10 py-5 rounded-full text-xl font-bold hover:bg-brand-700 transition-all shadow-xl hover:shadow-brand-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {status === "submitting" ? "Sending..." : "Submit Request"}
+              </button>
+              {status === "error" && (
+                <p className="text-red-500 text-center font-medium">
+                  Something went wrong. Please try again or contact us directly.
+                </p>
+              )}
+            </form>
             )}
           </motion.div>
-          
 
           {/* Info Column */}
           <motion.div 
