@@ -11,8 +11,8 @@ import {
   BookOpen, 
   Library, 
   ChevronRight, 
-  PlayCircle, 
-  CheckCircle2, 
+  CirclePlay, 
+  CheckCircle, 
   Check,
   Users, 
   ArrowRight,
@@ -100,7 +100,7 @@ const Footer = () => {
                 <Users size={20} />
               </div>
               <div className="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-400 hover:bg-brand-100 hover:text-brand-600 transition-colors cursor-pointer">
-                <PlayCircle size={20} />
+                <CirclePlay size={20} />
               </div>
             </div>
           </div>
@@ -138,7 +138,7 @@ const Footer = () => {
         <div className="border-t border-slate-100 pt-8 flex flex-col md:row justify-between items-center text-slate-400 text-xs">
           <p>© 2026 Novaelp. All rights reserved.</p>
           <div className="flex items-center space-x-2 mt-4 md:mt-0">
-            <CheckCircle2 size={14} className="text-emerald-500" />
+            <CheckCircle size={14} className="text-emerald-500" />
             <span>SOC2 Type II Certified</span>
           </div>
         </div>
@@ -200,7 +200,7 @@ const Home = () => {
                   <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <button className="bg-white text-slate-700 border border-slate-200 px-8 py-4 rounded-full text-lg font-bold hover:bg-slate-50 transition-all flex items-center justify-center">
-                  <PlayCircle className="mr-2 text-brand-600" />
+                  <CirclePlay className="mr-2 text-brand-600" />
                   Watch Overview
                 </button>
               </div>
@@ -396,7 +396,7 @@ const Solutions = () => {
               <div className="grid grid-cols-2 gap-4">
                 {item.features.map((feature, fIndex) => (
                   <div key={fIndex} className="flex items-center space-x-2">
-                    <CheckCircle2 className="text-brand-500" size={18} />
+                    <CheckCircle className="text-brand-500" size={18} />
                     <span className="text-sm font-medium text-slate-700">{feature}</span>
                   </div>
                 ))}
