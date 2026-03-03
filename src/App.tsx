@@ -1008,29 +1008,29 @@ const GetADemo = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("submitting");
-    
+
     const form = e.currentTarget;
     const formData = new FormData(form);
 
+    const payload = Object.fromEntries(formData.entries());
+
     try {
-      const response = await fetch("https://formspree.io/f/mnjbybyq", {
+      const response = await fetch("/api/send-demo-request", {
         method: "POST",
-        body: formData,
         headers: {
-          'Accept': 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
       });
 
-      if (response.ok) {
-        setStatus("success");
-        form.reset();
-      } else {
-        const result = await response.json();
-        console.error("Formspree error details:", result);
-        setStatus("error");
+      if (!response.ok) {
+        throw new Error("Request failed");
       }
+
+      setStatus("success");
+      form.reset();
     } catch (error) {
-      console.error("Submission error:", error);
+      console.error("Failed to submit demo request:", error);
       setStatus("error");
     }
   };
@@ -1076,7 +1076,7 @@ const GetADemo = () => {
                 </div>
                 <h3 className="text-3xl font-bold text-slate-900 mb-4">Request Received!</h3>
                 <p className="text-xl text-slate-600 max-w-md">
-                  We have taken your request and we will get back to you via your email and mobile number very soon.
+                  Thank you for your interest. Your request has been sent to our team and we will reach out via your email or phone very soon.
                 </p>
                 <button 
                   onClick={() => setStatus("idle")}
