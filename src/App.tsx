@@ -621,6 +621,37 @@ const About = () => {
 };
 
 const Blog = () => {
+  const [newsletterStatus, setNewsletterStatus] = React.useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  const handleNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (newsletterStatus === "submitting") return;
+    setNewsletterStatus("submitting");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const email = String(formData.get("email") ?? "");
+
+    try {
+      const response = await fetch("/api/newsletter-subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+
+      setNewsletterStatus("success");
+      form.reset();
+    } catch (error) {
+      console.error("Failed to subscribe to newsletter:", error);
+      setNewsletterStatus("error");
+    }
+  };
   const posts = [
     {
       title: "Digital Education Taking Over: Why Schools Must Adapt Now",
@@ -744,20 +775,36 @@ const Blog = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24">
         <div className="bg-slate-900 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
           <div className="relative z-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Stay Ahead of the Curve</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Get Novaelp Insights in Your Inbox</h2>
             <p className="text-brand-200 mb-10 max-w-xl mx-auto">
-              Subscribe to our newsletter for the latest insights on digital education and school management.
+              Subscribe for practical tips on instructional videos, digital learning materials, and custom educational content.
             </p>
-            <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" onSubmit={handleNewsletterSubmit}>
               <input 
                 type="email" 
-                placeholder="Enter your email" 
+                name="email"
+                required
+                placeholder="Enter your work email" 
                 className="flex-1 bg-white/10 border border-white/20 rounded-full px-6 py-4 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-brand-500"
               />
-              <button className="bg-brand-600 text-white px-8 py-4 rounded-full font-bold hover:bg-brand-700 transition-all">
-                Subscribe
+              <button
+                type="submit"
+                disabled={newsletterStatus === "submitting"}
+                className="bg-brand-600 text-white px-8 py-4 rounded-full font-bold hover:bg-brand-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {newsletterStatus === "submitting" ? "Subscribing..." : "Subscribe"}
               </button>
             </form>
+            {newsletterStatus === "success" && (
+              <p className="mt-4 text-sm text-emerald-300">
+                You&apos;re subscribed. We&apos;ll send occasional updates, not spam.
+              </p>
+            )}
+            {newsletterStatus === "error" && (
+              <p className="mt-4 text-sm text-red-300">
+                Something went wrong. Please try again in a moment.
+              </p>
+            )}
           </div>
         </div>
       </section>
